@@ -91,8 +91,8 @@ const deleteSlot = async (req, res) => {
 
 const mappToSite = (slot) => {
   let newitem = {}
-    newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD HH:mm');
-    newitem.end = moment(slot.endDatetime).format('YYYY-MM-DD HH:mm');
+    newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD hh:mm');
+    newitem.end = moment(slot.endDatetime).format('YYYY-MM-DD hh:mm');
     newitem.activityDate = moment(slot.activityDate).format('YYYY-MM-DD');
     newitem.name = slot.username;
   return newitem
