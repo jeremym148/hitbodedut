@@ -18,6 +18,7 @@
     "dev": "concurrently \"nodemon index.js\" \"npm run client\"",
     "build": "concurrently \"npm run start\" \"npm run clientbuild\""
   },
+  "heroku-run-build-script": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jeremym148/hitbodedut.git"
