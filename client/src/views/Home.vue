@@ -6,8 +6,11 @@
     </div>
     <span class="total-appointment">
       <span>There are currently:</span>
-      <div class="heart"></div>
-      <div class="numberOfHit">{{hitNow}}</div>
+      <!-- <div class="heart"></div> -->
+      <div class="heart-hit">
+        <img src="../assets/heart.png" >
+        <div class="number-of-hit">{{hitNow}}</div>
+      </div>
     </span>
   </div>
 </template>
@@ -53,7 +56,51 @@ export default {
   padding: 10px;
 }
 
-.heart{
+.heart-hit{
+    position: absolute;
+    right: 70px;
+    top: 38px;
+}
+
+.heart-hit img{
+  animation: animate 1s linear infinite;
+  width: 81px;
+}
+
+.number-of-hit{
+  position: absolute;
+    top: 26px;
+    left: 45px;
+    font-weight: 600;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+@keyframes animate{
+  0%{
+    transform: rotate(0deg) translate(10px,10px) scale(1);
+  }
+  25%{
+    transform: rotate(0deg) translate(10px,10px) scale(1);
+  }
+  30%{
+    transform: rotate(0deg) translate(10px,10px) scale(1.4);
+  }
+  50%{
+    transform: rotate(0deg) translate(10px,10px) scale(1.2);
+  }
+  70%{
+    transform: rotate(0deg) translate(10px,10px) scale(1.4);
+  }
+  90%{
+    transform: rotate(0deg) translate(10px,10px) scale(1);
+  }
+  100%{
+    transform: rotate(0deg) translate(10px,10px) scale(1);
+  }
+}
+
+/* .heart{
   width: 33px;
   position: relative;
   top: -25px;
@@ -84,10 +131,10 @@ export default {
   bottom:0;
   right:50%;
   border-radius: 50%;
-}
+} */
 
 
-@keyframes ani{
+/* @keyframes ani{
   0%{
     transform: rotate(45deg) translate(10px,10px) scale(1);
   }
@@ -109,5 +156,5 @@ export default {
   100%{
     transform: rotate(45deg) translate(10px,10px) scale(1);
   }
-}
+} */
 </style>

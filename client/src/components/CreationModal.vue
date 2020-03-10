@@ -192,7 +192,7 @@ import axios from "axios";
         }
 
         var hObject = {
-          name: this.inputName,
+          username: this.inputName,
           start: this.date + ' ' + this.timeFromSelected,
           end: this.date + ' ' + this.timeToSelected,
         }
