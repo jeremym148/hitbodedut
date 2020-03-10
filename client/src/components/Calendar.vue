@@ -73,69 +73,69 @@ import axios from "axios";
         return d.getFullYear() + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + d.getDate()).slice(-2);
       },
       events(){
-        // return this.$store.state.events;
-        var events = [{
-            name: "Anonymous",
-            start: "2020-03-10 10:00",
-            end: "2020-03-10 11:00",
-            },
-            {
-            name: "Anonymous",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Anonymous",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-          ];
-          return events;
+        return this.$store.state.events;
+        // var events = [{
+        //     name: "Anonymous",
+        //     start: "2020-03-10 10:00",
+        //     end: "2020-03-10 11:00",
+        //     },
+        //     {
+        //     name: "Anonymous",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //     {
+        //     name: "Anonymous",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //     {
+        //     name: "Michael",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //     {
+        //     name: "Michael",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //     {
+        //     name: "Michael",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //     {
+        //     name: "Michael",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //     {
+        //     name: "Michael",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //     {
+        //     name: "Michael",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //     {
+        //     name: "Michael",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //     {
+        //     name: "Michael",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //     {
+        //     name: "Michael",
+        //     start: "2020-03-10 07:00",
+        //     end: "2020-03-10 08:00",
+        //     },
+        //   ];
+        //   return events;
       }
     },
     methods:{
