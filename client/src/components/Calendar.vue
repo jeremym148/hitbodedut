@@ -55,6 +55,7 @@
 
 <script>
 import axios from "axios";
+import store from '../store';
 import CreationModal from './CreationModal';
   export default {
     data: () => ({
@@ -92,7 +93,12 @@ import CreationModal from './CreationModal';
       axios
         .get("/api/slots")
         .then(response => {
-          console.log(response)
+          // console.log(response)
+          // let events = [];
+          // for(event in response.data.slots){
+          //   events.push(event)
+          // }
+          this.$store.dispatch("addEvent", response.data.slots);
         });
     },
   }
