@@ -11,6 +11,7 @@
     "test": "test"
   },
   "scripts": {
+    "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run serve --prefix client",
