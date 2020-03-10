@@ -55,6 +55,7 @@
 
 <script>
 import CreationModal from './CreationModal';
+import axios from "axios";
   export default {
     data: () => ({
       type: 'month',
@@ -150,7 +151,11 @@ import CreationModal from './CreationModal';
       }
     },
     mounted(){
-
+      axios
+        .get("/api/slots")
+        .then(response => {
+          console.log(response)
+        });
     },
   }
 </script>
