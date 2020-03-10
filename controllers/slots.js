@@ -1,5 +1,6 @@
 const models = require("../database/models");
-const sequelize = require("sequelize")
+const sequelize = require("sequelize");
+const moment = require('moment');
 
 const createSlot = async (req, res) => {
   try {
@@ -26,7 +27,7 @@ const getAllSlots = async (req, res) => {
       //  } 
       // }
       
-    const slots = await models.Slot.findAll({
+    var slots = await models.Slot.findAll({
         // group: [sequelize.fn('date_trunc', 'day', sequelize.col('startDatetime'))],
         where: whereCondition,
         logging: console.log,
@@ -34,6 +35,12 @@ const getAllSlots = async (req, res) => {
         order: [['startDatetime', 'ASC']],
         // limit: count,
       });
+      slots = slots.map( (item) => {
+      item.startDatetime = moment(item.startDatetime).format('YYYY-MM-DD HH:mm')
+      item.endDatetime = moment(item.endDatetime).format('YYYY-MM-DD HH:mm')
+      item.activityDate = moment(item.activityDate).format('YYYY-MM-DD')
+      return item
+    })
     return res.status(200).json({ slots });
   } catch (error) {
     return res.status(500).send(error.message);
