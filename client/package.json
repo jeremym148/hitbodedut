@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
+  "heroku-run-build-script": true,
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
