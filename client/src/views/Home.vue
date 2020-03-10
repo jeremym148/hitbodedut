@@ -27,7 +27,14 @@ export default {
   },
   components: {
     
-  }
+  }, 
+  mounted(){
+      axios
+        .get("/api/slots/current")
+        .then(response => {
+          console.log(response.data.count)
+          hitNow = response.data.count;
+        })
 }
 </script>
 
