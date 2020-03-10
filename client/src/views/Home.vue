@@ -35,7 +35,7 @@ export default {
           console.log(response.data.count)
           this.hitNow = response.data.count;
         })
-}
+  }
 </script>
 
 <style scoped>
