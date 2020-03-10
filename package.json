@@ -11,16 +11,16 @@
     "test": "test"
   },
   "scripts": {
-    "postinstall": "if test \"$NODE_ENV\" = \"production\" ; then npm run build ; fi ",
+    "postinstall": "npm install && npm run clientinstall && npm run build",
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run serve --prefix client",
     "clientbuild":"npm run build --prefix client",
     "clientinstall":"npm install --prefix client",
     "dev": "concurrently \"nodemon index.js\" \"npm run client\"",
-    "build": "concurrently \"npm run start\" \"npm run clientbuild\" \"npm run clientinstall\""
+    "build": "concurrently \"npm run start\" \"npm run clientbuild\" "
   },
-  "heroku-postinstall": "npm install && npm run build",
+  "heroku-postinstall": "npm install && npm run clientinstall && npm run build",
   "heroku-run-build-script": true,
   "repository": {
     "type": "git",
