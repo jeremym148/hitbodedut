@@ -11,16 +11,14 @@
     "test": "test"
   },
   "scripts": {
-    "postinstall": "npm install && npm run clientinstall && npm run build",
+    "postinstall": "npm run build",
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run serve --prefix client",
     "clientbuild":"npm run build --prefix client",
-    "clientinstall":"npm install --prefix client",
     "dev": "concurrently \"nodemon index.js\" \"npm run client\"",
-    "build": "concurrently \"npm run start\" \"npm run clientbuild\" "
+    "build": "npm run clientbuild"
   },
-  "heroku-postinstall": "npm install && npm run clientinstall && npm run build",
   "heroku-run-build-script": true,
   "repository": {
     "type": "git",
@@ -53,6 +51,24 @@
     "sequelize": "^5.21.5",
     "vue": "^2.6.11",
     "vue-cli": "^2.9.6",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "core-js": "^3.6.4",
+    "vue-js-modal": "^1.3.33",
+    "vue-router": "^3.1.5",
+    "vuetify": "^2.2.11",
+    "vuex": "^3.1.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.0",
+    "@vue/cli-plugin-babel": "~4.2.0",
+    "@vue/cli-plugin-router": "~4.2.0",
+    "@vue/cli-plugin-vuex": "~4.2.0",
+    "@vue/cli-service": "~4.2.0",
+    "node-sass": "^4.12.0",
+    "sass": "^1.19.0",
+    "sass-loader": "^8.0.2",
+    "vue-cli-plugin-vuetify": "~2.0.5",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.3.0"
   }
 }
