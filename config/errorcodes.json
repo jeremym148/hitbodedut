@@ -1,0 +1,25 @@
+{
+  "GENERIC_ERROR": ["0x00111","error_generic"],
+  "SETTINGS_ERROR": ["0x00211","Error while rendering settings"],
+  "SALESFORCE_LOGIN_ERROR": ["0x00174","Error in Salesforce LOGIN"],
+  "SALESFORCE_CONNECT_ERROR": ["0x00170","Error in Salesforce connect"],
+  "SALESFORCE_SESSION_ERROR": ["0x00171","Error in Salesforce session"],
+  "SALESFORCE_LOGOUT_ERROR": ["0x00172","Error in Salesforce logout"],
+  "SALESFORCE_USER_NOT_FOUND_ERROR": ["0x00175","Error  Salesforce user not found"],
+  "SALESFORCE_USER_NOT_FOUND_ERROR_NICE": ["","You need to have an ICON account to use Wardrobing"],
+  "INVALID_SESSION_ID_ERROR": ["0x00173","SF accessToken expired, disconnection error :"],
+  "DATABASE_CONNECTION_ERROR": ["0x00180","Error during Database connection."],
+  "SERVER_START_ERROR": ["0x00181","Unable to start the server."],
+  "PRODUCTS_FROM_CATEGORY_ERROR": ["0x00620","An error occured when retrieving products"],
+  "PRODUCTS_FROM_SEARCH_ERROR": ["0x00621","An error occured during product search"],
+  "GET_LOOKS_ERROR": ["0x00711","An error occured when retrieving looks"],
+  "SAVE_LOOK_ERROR": ["0x00712","An error occured when saving look"],
+  "SAVE_LOOK_PRODUCT_IMAGE_NOT_FOUND": ["","Impossible to save look, please change SKU"],
+  "SAVE_LOOK_ERROR_STORE_NOT_FOUND": ["","Wardrobing tool is not accessible from your store"],
+  "DELETE_LOOK_ERROR": ["0x00713","An error occured when deleting look"],
+  "ARCHIVE_LOOK_ERROR": ["0x00714","An error occured when archiving look"],
+  "SHARE_LOOK_ERROR": ["0x00714","An error occured when sharing look"],
+  "GET_RECOS_ERROR": ["0x00521","An error occured during get recos"],
+  "SEND_EMAIL_ERROR": ["0x00415","Send email error"]
+
+}
