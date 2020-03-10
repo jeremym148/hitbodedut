@@ -12,7 +12,7 @@ export default new Vuex.Store({
       state.events.push(info)
     },
     addEvents(state, info) {
-      state.events.concat(info)
+      state.events = state.events.concat(info)
     },
   },
   actions: {
