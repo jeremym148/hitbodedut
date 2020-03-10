@@ -27,13 +27,11 @@
                 color="#f78b1f"
                 event-color="#f78b1f"
                 :events="events"
-                event-more=true
-                event-more-text="$vuetify.calendar.moreEvents"
                 @click:time="openCreateModal"
               ></v-calendar>
             </v-sheet>
           </v-flex>
-                      <v-btn
+          <v-btn
             absolute
             dark
             bottom
@@ -82,9 +80,21 @@ import CreationModal from './CreationModal';
         console.log(e)
       },
       openCreateModal(e){
-        this.clickedSlot = e;
+        console.log(e)
+        if(e.date){
+          this.clickedSlot = e;
+        } else{
+          var d = new Date();
+          this.clickedSlot = {date:d.getFullYear() + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + d.getDate()).slice(-2), hour:d.getHours(), minutes: d.getMinutes()}
+        }
         this.showCreateModal = true;
+        console.log('tamerenestring2dddguerre', this.showCreateModal)
       },
+      // openCreateModalPlus(){
+      //   this.clickedSlot = {};
+      //   this.showCreateModal = true;
+      //   console.log('tamerenestring2guerre', this.showCreateModal)
+      // },
       hideCreateModal(){
         this.showCreateModal = false;
       }

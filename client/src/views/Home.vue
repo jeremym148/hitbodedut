@@ -73,13 +73,13 @@ export default {
 
 .heart-hit img{
   animation: animate 1s linear infinite;
-  width: 81px;
+  width: 75px;
 }
 
 .number-of-hit{
   position: absolute;
     top: 26px;
-    left: 45px;
+    left: 42px;
     font-weight: 600;
     font-size: 22px;
     color: #ffffff;

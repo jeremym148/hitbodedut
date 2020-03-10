@@ -68,6 +68,7 @@
                                 v-model="timeFrom"
                                 full-width
                                 @click:minute="$refs.menu.save(time)"
+                                color="#f78b1f"
                               ></v-time-picker>
                             </v-menu>
                             <!-- <span>{{timeFrom}}</span> -->
@@ -93,6 +94,7 @@
                                 v-model="timeTo"
                                 full-width
                                 @click:minute="$refs.menu3.save(time)"
+                                color="#f78b1f"
                               ></v-time-picker>
                             </v-menu>
                             <!-- <span>{{timeTo}}</span> -->
@@ -149,7 +151,8 @@ import store from '../store';
       },
       timeFrom:{
         get: function () {
-          return ("0" + this.selectedSlot.hour).slice(-2) + ':00';
+          if(this.selectedSlot)
+         { return ("0" + this.selectedSlot.hour).slice(-2) + ':00';}
         },
         set: function (newValue) {
           this.timeFromSelected = newValue;    
@@ -157,7 +160,8 @@ import store from '../store';
       },
       timeTo:{
         get: function () {
-          return ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';
+           if(this.selectedSlot)
+         { return ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';}
         },
         set: function (newValue) {
           this.timeToSelected = newValue;    
@@ -178,6 +182,9 @@ import store from '../store';
         this.timeFromSelected = ("0" + (this.selectedSlot.hour)).slice(-2) + ':00';
         this.timeToSelected = ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';
       }
+    },
+     updated(){
+      console.log(this.dialog)
     },
     methods:{
       hideCreateModal(){
@@ -230,6 +237,10 @@ import store from '../store';
 .v-text-field__details {
     display: none;
 }
+
+/* .v-menu__content--fixed {
+  left: 25% !important;
+} */
 
 </style>
 
