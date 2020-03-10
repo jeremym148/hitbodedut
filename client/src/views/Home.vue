@@ -33,7 +33,7 @@ export default {
         .get("/api/slots/current")
         .then(response => {
           console.log(response.data.count)
-          hitNow = response.data.count;
+          this.hitNow = response.data.count;
         })
 }
 </script>
