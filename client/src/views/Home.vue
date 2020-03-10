@@ -22,7 +22,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      hitNow: "9"
+      hitNow: "0"
     }
   },
   components: {
@@ -36,6 +36,7 @@ export default {
           this.hitNow = response.data.count;
         })
   }
+}
 </script>
 
 <style scoped>
