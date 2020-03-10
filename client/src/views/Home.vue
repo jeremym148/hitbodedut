@@ -17,16 +17,25 @@
 
 <script>
 // @ is an alias to /src
+import axios from "axios";
 
 export default {
   name: 'Home',
   data () {
     return {
-      hitNow: "9"
+      hitNow: "0"
     }
   },
   components: {
     
+  }, 
+  mounted(){
+      axios
+        .get("/api/slots/current")
+        .then(response => {
+          console.log(response.data.count)
+          this.hitNow = response.data.count;
+        })
   }
 }
 </script>

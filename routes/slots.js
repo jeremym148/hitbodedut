@@ -3,6 +3,7 @@ const controllers = require('../controllers');
 
 
 router.post('/', controllers.slots.createSlot);
+router.get('/current', controllers.slots.getCurrentHitbodeduters);
 router.get('/', controllers.slots.getAllSlots);
 router.get('/:slotId', controllers.slots.getSlotById);
 router.put('/:slotId', controllers.slots.updateSlot);

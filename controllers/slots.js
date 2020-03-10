@@ -1,6 +1,6 @@
 const models = require("../database/models");
-const sequelize = require("sequelize");
 const moment = require('moment');
+const { QueryTypes } = require('sequelize');
 
 const createSlot = async (req, res) => {
   try {
@@ -9,6 +9,15 @@ const createSlot = async (req, res) => {
     return res.status(201).json(newSlot);
   } catch (error) {
     return res.status(500).json({ error: error.message });
+  }
+};
+
+const getCurrentHitbodeduters = async (req, res) => {
+  try {
+      const slots = await models.sequelize.query(`SELECT COUNT("id") FROM "Slots" Where NOW() BETWEEN "startDatetime" AND "endDatetime"`, { type: QueryTypes.SELECT });
+    return res.status(200).json({ count: slots[0].count });
+  } catch (error) {
+    return res.status(500).send(error.message);
   }
 };
 
@@ -105,5 +114,6 @@ module.exports = {
   getAllSlots,
   getSlotById,
   updateSlot,
-  deleteSlot
+  deleteSlot,
+  getCurrentHitbodeduters
 };
