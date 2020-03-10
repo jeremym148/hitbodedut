@@ -93,12 +93,17 @@ import CreationModal from './CreationModal';
       axios
         .get("/api/slots")
         .then(response => {
-          // console.log(response)
+          console.log(response)
           // let events = [];
           // for(event in response.data.slots){
-          //   events.push(event)
+          //   events.push({
+          //     name: event.name,
+          //     start: event.start,
+          //     end: event.end,
+          //     activityDate: event.activityDate
+          //   })
           // }
-          this.$store.dispatch("addEvent", response.data.slots);
+          // this.$store.dispatch("addEvent", response.data.slots);
         });
     },
   }
