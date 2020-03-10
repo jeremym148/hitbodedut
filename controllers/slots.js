@@ -5,8 +5,9 @@ const moment = require('moment');
 const createSlot = async (req, res) => {
   try {
     const slot = await models.Slot.create(req.body);
+    let newSlot = mappToSite(slot);
     return res.status(201).json({
-      mappToSite(slot)
+      newSlot
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });
