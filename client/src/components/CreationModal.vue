@@ -209,7 +209,7 @@ import store from '../store';
           .post("/api/slots", hObject)
           .then(response => {
             console.log(response);
-            this.$store.dispatch("addEvent", response.data.tempObject);
+            this.$store.dispatch("addEvent", tempObject);
           });
 
         this.hideCreateModal();
