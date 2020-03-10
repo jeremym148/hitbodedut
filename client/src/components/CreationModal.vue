@@ -201,7 +201,7 @@ import axios from "axios";
 
 
         axios
-          .post("/api/getEvents", hObject)
+          .post("/api/slots", hObject)
           .then(response => {
             console.log(response);
             // this.$store.dispatch("addEvent", response.data.results);
