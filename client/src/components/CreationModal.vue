@@ -198,13 +198,18 @@ import store from '../store';
           endDatetime: this.date + ' ' + this.timeToSelected,
           activityDate: this.date,
         }
-        
+
+        var tempObject = {
+          username: this.inputName,
+          start: this.date + ' ' + this.timeFromSelected,
+          end: this.date + ' ' + this.timeToSelected,
+        }
 
         axios
           .post("/api/slots", hObject)
           .then(response => {
             console.log(response);
-            // this.$store.dispatch("addEvent", response.data.results);
+            this.$store.dispatch("addEvent", tempObject);
           });
 
         this.hideCreateModal();
