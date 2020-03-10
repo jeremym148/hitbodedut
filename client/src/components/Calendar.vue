@@ -18,7 +18,7 @@
           <v-flex
             xs12
           >
-            <v-sheet height="68vh">
+            <v-sheet class="calendar-height">
               <v-calendar
                 ref="calendar"
                 v-model="start"
@@ -40,7 +40,7 @@
             right
             color="#f78b1f"
             fab
-            style="bottom: 16px"
+            style="bottom: 40px"
             @click="openCreateModal"
           >
         <v-icon>mdi-plus</v-icon>
@@ -55,7 +55,6 @@
 
 <script>
 import CreationModal from './CreationModal';
-import axios from "axios";
   export default {
     data: () => ({
       type: 'month',
@@ -73,69 +72,7 @@ import axios from "axios";
         return d.getFullYear() + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + d.getDate()).slice(-2);
       },
       events(){
-        // return this.$store.state.events;
-        var events = [{
-            name: "Anonymous",
-            start: "2020-03-10 10:00",
-            end: "2020-03-10 11:00",
-            },
-            {
-            name: "Anonymous",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Anonymous",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-            {
-            name: "Michael",
-            start: "2020-03-10 07:00",
-            end: "2020-03-10 08:00",
-            },
-          ];
-          return events;
+        return this.$store.state.events;
       }
     },
     methods:{
@@ -161,11 +98,15 @@ import axios from "axios";
 </script>
 
 <style>
+.calendar-height{
+  height: 77vh;
+}
+
 .row-btn{
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 0px 10px;
+  padding: 0px 40px;
   position: absolute;
   margin-top: 22px;
   z-index: 2;
@@ -178,5 +119,15 @@ import axios from "axios";
 
 .v-calendar-daily__intervals-body{
   width: 50px !important;
+}
+
+ @media screen and (max-width: 1024px) {
+  .calendar-height{
+    height: 68vh;
+  }
+
+  .row-btn{
+    padding: 0px 10px;
+  }
 }
 </style>
