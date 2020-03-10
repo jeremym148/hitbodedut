@@ -200,7 +200,7 @@ import store from '../store';
         }
 
         var tempObject = {
-          username: this.inputName,
+          name: this.inputName,
           start: this.date + ' ' + this.timeFromSelected,
           end: this.date + ' ' + this.timeToSelected,
         }

@@ -99,15 +99,16 @@ import CreationModal from './CreationModal';
           // // let events = response.data.slots;
           console.log(response)
           console.log(response.data.slots)
-          response.data.slots.map((event) => {
-             console.log(event)
-            this.$store.dispatch("addEvent",{
-              name: event.name,
-              start: event.start,
-              end: event.end,
-              // activityDate: event.activityDate
-            })
-          })
+          this.$store.dispatch("addEvents",response.data.slots)
+          // response.data.slots.map((event) => {
+          //    console.log(event)
+          //   this.$store.dispatch("addEvent",{
+          //     name: event.name,
+          //     start: event.start,
+          //     end: event.end,
+          //     // activityDate: event.activityDate
+          //   })
+          // })
           // for(event in response.data.slots){
           //   console.log(event)
           //   this.$store.dispatch("addEvent",{

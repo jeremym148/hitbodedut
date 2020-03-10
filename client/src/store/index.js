@@ -11,10 +11,16 @@ export default new Vuex.Store({
     addEvent(state, info) {
       state.events.push(info)
     },
+    addEvents(state, info) {
+      state.events.concat(info)
+    },
   },
   actions: {
     addEvent(context, info) {
       context.commit('addEvent', info)
+    },
+    addEvents(context, info) {
+      context.commit('addEvents', info)
     },
   },
   modules: {
