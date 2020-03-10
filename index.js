@@ -21,7 +21,7 @@ if(process.env.NODE_ENV === 'production'){
   app
   .set('trust proxy', 1) // trust first proxy
   .use(express.static(path.join (__dirname, '/client/dist')))
-  .get('*', (req, res) => {
+  .get('/blou', (req, res) => {
     res.sendFile(path.resolve(__dirname,'client','dist','index.html'))
   });
 }
