@@ -126,6 +126,7 @@
 
 <script>
 import axios from "axios";
+import store from '../store';
   export default {
     data () {
       return {
@@ -193,12 +194,11 @@ import axios from "axios";
 
         var hObject = {
           username: this.inputName,
-          start: this.date + ' ' + this.timeFromSelected,
-          end: this.date + ' ' + this.timeToSelected,
+          startDatetime: this.date + ' ' + this.timeFromSelected,
+          endDatetime: this.date + ' ' + this.timeToSelected,
+          activityDate: this.date,
         }
         
-        console.log(hObject);
-
 
         axios
           .post("/api/slots", hObject)
