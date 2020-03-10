@@ -6,7 +6,7 @@ const createSlot = async (req, res) => {
   try {
     const slot = await models.Slot.create(req.body);
     return res.status(201).json({
-      slot
+      mappToSite(slot)
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -36,12 +36,7 @@ const getAllSlots = async (req, res) => {
         // limit: count,
       });
       let slotsMapped = slots.map( (item) => {
-        let newitem = {}
-        newitem.start = moment(item.startDatetime).format('YYYY-MM-DD HH:mm');
-        newitem.end = moment(item.endDatetime).format('YYYY-MM-DD HH:mm');
-        newitem.activityDate = moment(item.activityDate).format('YYYY-MM-DD');
-        newitem.name = item.username;
-      return newitem
+        return mappToSite(item)
     })
     return res.status(200).json({ slotsMapped });
   } catch (error) {
@@ -94,6 +89,15 @@ const deleteSlot = async (req, res) => {
     return res.status(500).send(error.message);
   }
 };
+
+const mappToSite = (slot) => {
+  let newitem = {}
+    newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD HH:mm');
+    newitem.end = moment(slot.endDatetime).format('YYYY-MM-DD HH:mm');
+    newitem.activityDate = moment(slot.activityDate).format('YYYY-MM-DD');
+    newitem.name = slot.username;
+  return newitem
+}
 
 
 
