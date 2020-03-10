@@ -6,9 +6,7 @@ const createSlot = async (req, res) => {
   try {
     const slot = await models.Slot.create(req.body);
     let newSlot = mappToSite(slot);
-    return res.status(201).json({
-      newSlot
-    });
+    return res.status(201).json(newSlot);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -39,7 +37,7 @@ const getAllSlots = async (req, res) => {
       let slotsMapped = slots.map( (item) => {
         return mappToSite(item)
     })
-    return res.status(200).json({ slotsMapped });
+    return res.status(200).json({ slots: slotsMapped });
   } catch (error) {
     return res.status(500).send(error.message);
   }
