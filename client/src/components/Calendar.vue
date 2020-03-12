@@ -146,7 +146,9 @@ import utils from './utils'
         this.showCreateModal = false;
       },
       getHebrewDate(date){
-        let hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
+        if(this.hebrewCal.length > 0){
+          let hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
+        }
         return hebrewDate
       },
     },
