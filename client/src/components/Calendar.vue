@@ -29,7 +29,7 @@
                 :events="events"
                 @click:time="openCreateModal"
               >
-                <template  v-slot:interval="{ minutesToPixels, hour, minute }">
+                <template  v-slot:interval="{ minutesToPixels, hour }">
                   <div v-if="hour == nowHour" class="nowIndicator"
                     :style="{
                       top: minutesToPixels(nowMinute) + 'px',           
@@ -141,15 +141,15 @@ import CreationModal from './CreationModal';
           console.log(response)
           console.log(response.data.slots)
           this.$store.dispatch("addEvents",response.data.slots)
-          // response.data.slots.map((event) => {
-          //    console.log(event)
-          //   this.$store.dispatch("addEvent",{
-          //     name: event.name,
-          //     start: event.start,
-          //     end: event.end,
-          //     // activityDate: event.activityDate
-          //   })
-          // })
+          response.data.slots.map((event) => {
+             console.log(event)
+            this.$store.dispatch("addEvent",{
+              name: event.name,
+              start: event.start,
+              end: event.end,
+              // activityDate: event.activityDate
+            })
+          })
           // for(event in response.data.slots){
           //   console.log(event)
           //   this.$store.dispatch("addEvent",{
