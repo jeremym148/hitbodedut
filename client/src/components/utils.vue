@@ -16,10 +16,9 @@ export default {
             console.log('hebrew cal', response);
             let hebrewCalTemp = response.data.items;
             let hebrewCal = [];
-            
-            for(item in hebrewCalTemp){
-                hebrewCal.push({date: item.date, hebrew: item.hebrew});
-            }
+            hebrewCalTemp.map( (item) => {
+                 hebrewCal.push({date: item.date, hebrew: item.hebrew});
+            })
             // hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
             this.$store.dispatch('addHebCal', hebrewCalTemp);
             return hebrewCal;
