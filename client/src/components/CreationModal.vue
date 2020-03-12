@@ -253,18 +253,18 @@ import store from '../store';
         var hObject = {
           username: this.inputName,
           startDatetime: new Date(this.date + 'T' + 
-          (this.timeFrom && this.timeFrom != "" ? this.timeFrom.replace('AM','').replace('PM','')  : 
+          (this.timeFrom && this.timeFrom != "" ? this.timeFrom  : 
            '00:04')),
           endDatetime: new Date(this.date + 'T' + 
-          (this.timeTo && this.timeTo != "" ? this.timeTo.replace('AM','').replace('PM','')  : 
+          (this.timeTo && this.timeTo != "" ? this.timeTo  : 
            '00:05')),
           activityDate: this.date,
         }
 
         var tempObject = {
           name: this.inputName,
-          start: this.date + ' ' + this.timeFrom.replace('AM','').replace('PM',''),
-          end: this.date + ' ' + this.timeTo.replace('AM','').replace('PM',''),
+          start: this.date + ' ' + this.timeFrom,
+          end: this.date + ' ' + this.timeTo,
         }
 
         axios
