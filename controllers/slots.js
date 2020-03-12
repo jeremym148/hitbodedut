@@ -5,8 +5,7 @@ const { QueryTypes } = require('sequelize');
 const createSlot = async (req, res) => {
   try {
     const slot = await models.Slot.create(req.body);
-    let newSlot = mappToSite(slot);
-    return res.status(201).json(newSlot);
+    return res.status(201).json(slot);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
