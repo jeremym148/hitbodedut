@@ -17,7 +17,7 @@
                         </div> 
                     </v-flex>
                     <v-flex xs9>
-                       <!-- <v-menu
+                       <v-menu
                             v-model="dateMenu"
                             :close-on-content-click="false"
                             :nudge-right="-10"
@@ -37,9 +37,9 @@
                             </template>
                             <v-date-picker v-model="date" @input="dateMenu = false" color="black" prev-icon="mdi-chevron-left" next-icon="mdi-chevron-right"></v-date-picker>
                             
-                        </v-menu> -->
+                        </v-menu>
 
-                        <span>{{date}}</span>
+                        <!-- <span>{{date}}</span> -->
                     </v-flex>
                 </v-layout>
 
@@ -50,7 +50,35 @@
                         </div> 
                     </v-flex>
                     <v-flex xs9 style="display: flex; padding: 4px 0; align-items: baseline">
-                        <v-flex xs5>
+
+
+                            <v-flex xs9 style="display: flex; padding: 4px 0;">
+                                <v-flex xs5>
+                                    <v-select
+                                    :items="optionsHours"
+                                    :menu-props="{ bottom: true, offsetY: true }"
+                                    v-model="timeFrom"
+                                    filled
+                                    append-icon="mdi-menu-down"
+                                    ></v-select>
+                                </v-flex>
+                                <v-spacer></v-spacer>
+                                <span class="toLabel">to</span>
+                                <v-spacer></v-spacer>
+                                <v-flex xs5>
+                                    <v-select
+                                    :items="optionsHours"
+                                    v-model="timeTo"
+                                    :menu-props="{ bottom: true, offsetY: true }"
+                                    filled
+                                    append-icon="mdi-menu-down"
+                                    ></v-select>
+                                </v-flex> 
+                            </v-flex>
+
+
+
+                        <!-- <v-flex xs5>
                             <v-menu
                               ref="menu"
                               v-model="menu2"
@@ -71,7 +99,9 @@
                                 color="#f78b1f"
                               ></v-time-picker>
                             </v-menu>
-                            <!-- <span>{{timeFrom}}</span> -->
+
+                            
+                            <span>{{timeFrom}}</span>
                         </v-flex>
                         <v-spacer></v-spacer>
                         <span class="toLabel">to</span>
@@ -97,9 +127,9 @@
                                 color="#f78b1f"
                               ></v-time-picker>
                             </v-menu>
-                            <!-- <span>{{timeTo}}</span> -->
-                    </v-flex>
-                    </v-flex>
+                            <span>{{timeTo}}</span>
+                    </v-flex> -->
+                    </v-flex> 
                 </v-layout>
 
                 <v-layout row wrap class="modal-row"> <!-- row 1 -->
@@ -141,6 +171,8 @@ import store from '../store';
         timeToSelected: "", 
         anonymousCheckbox: false,
         inputName: '',
+        timeFrom: null,
+        timeTo: null,
       }
     },
     props:['dialog', 'selectedSlot'],
@@ -149,30 +181,45 @@ import store from '../store';
         var d = new Date();
         return d.getFullYear() + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + d.getDate()).slice(-2);
       },
-      timeFrom:{
-        get: function () {
-          if(this.selectedSlot)
-         { return ("0" + this.selectedSlot.hour).slice(-2) + ':00';}
-        },
-        set: function (newValue) {
-          this.timeFromSelected = newValue;    
-        }
-      },
-      timeTo:{
-        get: function () {
-           if(this.selectedSlot)
-         { return ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';}
-        },
-        set: function (newValue) {
-          this.timeToSelected = newValue;    
-        }
-      },
+      // timeFrom:{
+      //   get: function () {
+      //     if(this.selectedSlot)
+      //    { return ("0" + this.selectedSlot.hour).slice(-2) + ':00';}
+      //   },
+      //   set: function (newValue) {
+      //     this.timeFromSelected = newValue;    
+      //   }
+      // },
+      // timeTo:{
+      //   get: function () {
+      //      if(this.selectedSlot)
+      //    { return ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';}
+      //   },
+      //   set: function (newValue) {
+      //     this.timeToSelected = newValue;    
+      //   }
+      // },
       date(){
         if(this.selectedSlot){
           return this.selectedSlot.date
         } else {
           return null
         }
+      },
+      optionsHours(){
+        var x = 10; //minutes interval
+        var times = []; // time array
+        var tt = 0; // start time
+        var ap = ['AM', 'PM']; // AM-PM
+
+        //loop to increment the time and push results in array
+        for (var i=0;tt<24*60; i++) {
+          var hh = Math.floor(tt/60); // getting hours of day in 0-24 format
+          var mm = (tt%60); // getting minutes of the hour in 0-55 format
+          times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh/12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
+          tt = tt + x;
+        }
+        return times
       },
     },
     mounted(){

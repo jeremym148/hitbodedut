@@ -28,7 +28,25 @@
                 event-color="#f78b1f"
                 :events="events"
                 @click:time="openCreateModal"
-              ></v-calendar>
+              >
+                <template  v-slot:interval="{ minutesToPixels, hour, minute }">
+                  <div v-if="hour == nowHour" class="nowIndicator"
+                    :style="{
+                      top: minutesToPixels(nowMinute) + 'px',           
+                      position: 'relative'
+                    }">
+                  </div>
+                  <div v-if="hour == nowHour" class="nowIndicatorLeft"
+                    :style="{
+                      top: 'calc(' + minutesToPixels(nowMinute) + 'px - 6px)', 
+                      borderRadius: '50px',
+                      width: '10px',
+                      height: '10px',  
+                      position: 'relative',
+                    }">
+                  </div>
+                </template>
+              </v-calendar>
             </v-sheet>
           </v-flex>
           <v-btn
@@ -71,9 +89,22 @@ import CreationModal from './CreationModal';
         var d = new Date();
         return d.getFullYear() + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + d.getDate()).slice(-2);
       },
+      nowHour(){
+        let d = new Date();
+        return d.getHours();
+      },
+      nowMinute(){
+        let d = new Date();
+        return d.getMinutes();
+      },
       events(){
-        return this.$store.state.events;
-      }
+        let events = this.$store.state.events;
+        // events.push({
+        //   name: '',
+        //   start: this.nowDate + ' ' + this.nowHourMinute
+        // })
+        return events;
+      },
     },
     methods:{
       log(e){
@@ -88,7 +119,7 @@ import CreationModal from './CreationModal';
           this.clickedSlot = {date:d.getFullYear() + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + d.getDate()).slice(-2), hour:d.getHours(), minutes: d.getMinutes()}
         }
         this.showCreateModal = true;
-        console.log('tamerenestring2dddguerre', this.showCreateModal)
+        // console.log('tamerenestring2dddguerre', this.showCreateModal)
       },
       // openCreateModalPlus(){
       //   this.clickedSlot = {};
@@ -156,6 +187,15 @@ import CreationModal from './CreationModal';
 
 .v-calendar-daily__intervals-body{
   width: 50px !important;
+}
+
+.nowIndicator{
+  background-color: red;
+  height: 2px;
+}
+.nowIndicatorLeft{
+  background-color: red;
+  height: 2px;
 }
 
  @media screen and (max-width: 1024px) {
