@@ -95,6 +95,7 @@ import utils from './utils'
       // end: '2019-01-06',
       showCreateModal: false,
       clickedSlot: null,
+      hebrewCal: [],
     }),
     components:{
       CreationModal
@@ -145,12 +146,13 @@ import utils from './utils'
         this.showCreateModal = false;
       },
       getHebrewDate(date){
-        console.log(date);
+        let hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
+        return hebrewDate
       },
     },
     mounted(){
 
-      utils.getHebrewCal();
+      this.hebrewCal = utils.getHebrewCal();
 
       axios
         .get("/api/slots")
