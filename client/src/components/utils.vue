@@ -20,6 +20,7 @@ export default {
                  hebrewCal.push({date: item.date, hebrew: item.hebrew});
             })
             // hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
+            console.log(hebrewCalTemp)
             this.$store.dispatch('addHebCal', hebrewCalTemp);
             return hebrewCal;
         });
