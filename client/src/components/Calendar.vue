@@ -30,7 +30,7 @@
                 @click:time="openCreateModal"
               >
 
-              <!-- Hebrew date -->
+              <!-- Hebrew date
               <template v-slot:day-header="{ date }">
                 <template
                   
@@ -38,7 +38,7 @@
                 >
                   {{hebrewDate(date)}}
                 </template>
-              </template>
+              </template> -->
 
 
 
@@ -147,13 +147,13 @@ import utils from './utils'
       hideCreateModal(){
         this.showCreateModal = false;
       },
-      getHebrewDate(date){
-        let hebrewDate = "";
-        if(this.hebrewCal && this.hebrewCal.length > 0){
-          hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
-        }
-        return hebrewDate
-      },
+      // getHebrewDate(date){
+      //   let hebrewDate = "";
+      //   if(this.hebrewCal && this.hebrewCal.length > 0){
+      //     hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
+      //   }
+      //   return hebrewDate
+      // },
       mappToSite(slot){
         let newitem = {}
         newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD HH:mm');
@@ -162,19 +162,19 @@ import utils from './utils'
         newitem.name = slot.username;
         return newitem
       },
-      hebrewDate(date){
-        let hebCal = this.$store.state.hebrewCal;
-        if(hebCal && (hebCal.length > 0)){
-          return this.$store.state.hebrewCal.find(item => item.date == date).hebrew
-        } else {
-          return null
-        }
+      // hebrewDate(date){
+      //   let hebCal = this.$store.state.hebrewCal;
+      //   if(hebCal && (hebCal.length > 0)){
+      //     return this.$store.state.hebrewCal.find(item => item.date == date).hebrew
+      //   } else {
+      //     return null
+      //   }
         
-      }
+      // }
     },
     mounted(){
 
-      this.hebrewCal = utils.getHebrewCal();
+      // this.hebrewCal = utils.getHebrewCal();
 
       axios
         .get("/api/slots")
