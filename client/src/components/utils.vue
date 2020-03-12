@@ -14,7 +14,14 @@ export default {
         .get("https://www.hebcal.com/hebcal/?v=1&cfg=json&year=now&month=" + currentMonth + "&geo=geoname&geonameid=281184&m=50&d=on")
         .then(response => {
             console.log('hebrew cal', response);
-            let hebrewCal = response.data.items;
+            let hebrewCalTemp = response.data.items;
+            let hebrewCal = [];
+            
+            for(item in hebrewCalTemp){
+                hebrewCal.push({date: item.date, hebrew: item.hebrew});
+            }
+            // hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
+            this.$store.dispatch('addHebCal', hebrewCalTemp);
             return hebrewCal;
         });
     },

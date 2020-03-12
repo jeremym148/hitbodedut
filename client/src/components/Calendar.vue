@@ -36,7 +36,7 @@
                   
                   class="text-center"
                 >
-                  {{getHebrewDate(date)}}
+                  {{hebrewDate(date)}}
                 </template>
               </template>
 
@@ -96,7 +96,7 @@ import utils from './utils'
       // end: '2019-01-06',
       showCreateModal: false,
       clickedSlot: null,
-      hebrewCal: [],
+      
     }),
     components:{
       CreationModal
@@ -160,6 +160,15 @@ import utils from './utils'
         newitem.activityDate = slot.activityDate ? moment(slot.activityDate).format('YYYY-MM-DD') : undefined;
         newitem.name = slot.username;
         return newitem
+      },
+      hebrewDate(date){
+        let hebCal = this.$store.state.hebrewCal;
+        if(hebCal && (hebCal.length > 0)){
+          return this.$store.state.hebrewCal.find(item => item.date == date).hebrew
+        } else {
+          return null
+        }
+        
       }
     },
     mounted(){
