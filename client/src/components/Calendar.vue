@@ -120,7 +120,7 @@ import utils from './utils'
         //   name: '',
         //   start: this.nowDate + ' ' + this.nowHourMinute
         // })
-        console.logs(events)
+        console.log(events)
         return events;
       },
     },
