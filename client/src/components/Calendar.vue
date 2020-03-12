@@ -29,7 +29,21 @@
                 :events="events"
                 @click:time="openCreateModal"
               >
-                <template  v-slot:interval="{ minutesToPixels, hour, minute }">
+
+              <!-- Hebrew date -->
+              <template v-slot:day-header="{ date }">
+                <template
+                  
+                  class="text-center"
+                >
+                  {{hebrewDate(date)}}
+                </template>
+              </template>
+
+
+
+
+                <template  v-slot:interval="{ minutesToPixels, hour }">
                   <div v-if="hour == nowHour" class="calendar__now-indicator"
                     :style="{
                       top: minutesToPixels(nowMinute) + 'px',           
@@ -71,8 +85,10 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 import store from '../store';
 import CreationModal from './CreationModal';
+import utils from './utils'
   export default {
     data: () => ({
       type: 'month',
@@ -80,6 +96,7 @@ import CreationModal from './CreationModal';
       // end: '2019-01-06',
       showCreateModal: false,
       clickedSlot: null,
+      
     }),
     components:{
       CreationModal
@@ -103,6 +120,7 @@ import CreationModal from './CreationModal';
         //   name: '',
         //   start: this.nowDate + ' ' + this.nowHourMinute
         // })
+        console.log(events)
         return events;
       },
     },
@@ -128,9 +146,36 @@ import CreationModal from './CreationModal';
       // },
       hideCreateModal(){
         this.showCreateModal = false;
+      },
+      getHebrewDate(date){
+        let hebrewDate = "";
+        if(this.hebrewCal && this.hebrewCal.length > 0){
+          hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
+        }
+        return hebrewDate
+      },
+      mappToSite(slot){
+        let newitem = {}
+        newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD HH:mm');
+        newitem.end = moment(slot.endDatetime).format('YYYY-MM-DD HH:mm');
+        // newitem.activityDate = slot.activityDate ? moment(slot.activityDate).format('YYYY-MM-DD') : undefined;
+        newitem.name = slot.username;
+        return newitem
+      },
+      hebrewDate(date){
+        let hebCal = this.$store.state.hebrewCal;
+        if(hebCal && (hebCal.length > 0)){
+          return this.$store.state.hebrewCal.find(item => item.date == date).hebrew
+        } else {
+          return null
+        }
+        
       }
     },
     mounted(){
+
+      this.hebrewCal = utils.getHebrewCal();
+
       axios
         .get("/api/slots")
         .then(response => {
@@ -140,16 +185,15 @@ import CreationModal from './CreationModal';
           // // let events = response.data.slots;
           console.log(response)
           console.log(response.data.slots)
-          this.$store.dispatch("addEvents",response.data.slots)
-          // response.data.slots.map((event) => {
-          //    console.log(event)
-          //   this.$store.dispatch("addEvent",{
-          //     name: event.name,
-          //     start: event.start,
-          //     end: event.end,
-          //     // activityDate: event.activityDate
-          //   })
+          // let slots = response.data.slots.map( (item) => {
+          //     return this.mappToSite(item)
           // })
+          // console.log(slots);
+          // this.$store.dispatch("addEvents", slots)
+          response.data.slots.map((event) => {
+             console.log(this.mappToSite(event))
+            this.$store.dispatch("addEvent",this.mappToSite(event))
+          })
           // for(event in response.data.slots){
           //   console.log(event)
           //   this.$store.dispatch("addEvent",{
