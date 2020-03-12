@@ -29,6 +29,20 @@
                 :events="events"
                 @click:time="openCreateModal"
               >
+
+              <!-- Hebrew date -->
+              <template v-slot:day-header="{ date }">
+                <template
+                  
+                  class="text-center"
+                >
+                  {{getHebrewDate(date)}}
+                </template>
+              </template>
+
+
+
+
                 <template  v-slot:interval="{ minutesToPixels, hour }">
                   <div v-if="hour == nowHour" class="nowIndicator"
                     :style="{
@@ -74,6 +88,7 @@ import axios from "axios";
 import moment from "moment";
 import store from '../store';
 import CreationModal from './CreationModal';
+import utils from './utils'
   export default {
     data: () => ({
       type: 'month',
@@ -81,6 +96,7 @@ import CreationModal from './CreationModal';
       // end: '2019-01-06',
       showCreateModal: false,
       clickedSlot: null,
+      hebrewCal: [],
     }),
     components:{
       CreationModal
@@ -130,6 +146,12 @@ import CreationModal from './CreationModal';
       hideCreateModal(){
         this.showCreateModal = false;
       },
+      getHebrewDate(date){
+        if(this.hebrewCal && this.hebrewCal.length > 0){
+          let hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
+        }
+        return hebrewDate
+      },
       mappToSite(slot){
         let newitem = {}
         newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD HH:mm');
@@ -141,8 +163,8 @@ import CreationModal from './CreationModal';
     },
     mounted(){
 
-      getHebrewCal();
-      
+      this.hebrewCal = utils.getHebrewCal();
+
       axios
         .get("/api/slots")
         .then(response => {
