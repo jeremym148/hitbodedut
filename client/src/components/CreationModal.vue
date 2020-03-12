@@ -245,22 +245,22 @@ import store from '../store';
         if(this.inputName == '' || this.anonymousCheckbox){
           this.inputName = 'Anonymous'
         }
-        console.log(this.date + 'T' + this.timeFrom + ':00')
+        console.log(this.date + 'T' + this.timeFrom )
         var hObject = {
           username: this.inputName,
           startDatetime: new Date(this.date + 'T' + 
-          (this.timeFrom && this.timeFrom != "" ? this.timeFrom +':00' : 
-           '00:04:00')),
+          (this.timeFrom && this.timeFrom != "" ? this.timeFrom.replace('AM','').replace('PM','')  : 
+           '00:04')),
           endDatetime: new Date(this.date + 'T' + 
-          (this.timeTo && this.timeTo != "" ? this.timeTo +':00' : 
-           '00:05:00')),
+          (this.timeTo && this.timeTo != "" ? this.timeTo.replace('AM','').replace('PM','')  : 
+           '00:05')),
           activityDate: this.date,
         }
 
         var tempObject = {
           name: this.inputName,
-          start: this.date + ' ' + this.timeFrom,
-          end: this.date + ' ' + this.timeTo,
+          start: this.date + ' ' + this.timeFrom.replace('AM','').replace('PM',''),
+          end: this.date + ' ' + this.timeTo.replace('AM','').replace('PM',''),
         }
 
         axios
