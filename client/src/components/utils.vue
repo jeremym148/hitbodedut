@@ -22,7 +22,7 @@ export default {
             // hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
             console.log(hebrewCalTemp)
             if(hebrewCalTemp){
-                this.$store.dispatch('addHebCal', hebrewCalTemp);
+                // this.$store.dispatch('addHebCal', hebrewCalTemp);
             }
             return hebrewCal;
         });
