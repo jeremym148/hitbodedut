@@ -43,7 +43,7 @@
 
 
 
-                <template  v-slot:interval="{ minutesToPixels, hour }">
+                <!-- <template  v-slot:interval="{ minutesToPixels, hour }">
                   <div v-if="hour == nowHour" class="calendar__now-indicator"
                     :style="{
                       top: minutesToPixels(nowMinute) + 'px',           
@@ -59,7 +59,7 @@
                       position: 'relative',
                     }">
                   </div>
-                </template>
+                </template> -->
               </v-calendar>
             </v-sheet>
           </v-flex>
