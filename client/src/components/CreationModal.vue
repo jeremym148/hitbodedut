@@ -206,19 +206,26 @@ import store from '../store';
         }
       },
       optionsHours(){
-        var x = 10; //minutes interval
-        var times = []; // time array
-        var tt = 0; // start time
-        var ap = ['AM', 'PM']; // AM-PM
+        // var x = 10; //minutes interval
+        // var times = []; // time array
+        // var tt = 0; // start time
+        // var ap = ['AM', 'PM']; // AM-PM
 
-        //loop to increment the time and push results in array
-        for (var i=0;tt<24*60; i++) {
-          var hh = Math.floor(tt/60); // getting hours of day in 0-24 format
-          var mm = (tt%60); // getting minutes of the hour in 0-55 format
-          times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh/12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
-          tt = tt + x;
+        // //loop to increment the time and push results in array
+        // for (var i=0;tt<24*60; i++) {
+        //   var hh = Math.floor(tt/60); // getting hours of day in 0-24 format
+        //   var mm = (tt%60); // getting minutes of the hour in 0-55 format
+        //   times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh/12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
+        //   tt = tt + x;
+        // }
+        // return times
+        var arr = [], i, j;
+        for(i=0; i<24; i++) {
+          for(j=0; j<4; j++) {
+            arr.push(i + ":" + (j===0 ? "00" : 15*j) );
+          }
         }
-        return times
+        return arr;
       },
     },
     mounted(){
@@ -248,18 +255,18 @@ import store from '../store';
         var hObject = {
           username: this.inputName,
           startDatetime: new Date(this.date + 'T' + 
-          (this.timeFrom && this.timeFrom != "" ? this.timeFrom.replace('AM','').replace('PM','')  : 
+          (this.timeFrom && this.timeFrom != "" ? this.timeFrom  : 
            '00:04')),
           endDatetime: new Date(this.date + 'T' + 
-          (this.timeTo && this.timeTo != "" ? this.timeTo.replace('AM','').replace('PM','')  : 
+          (this.timeTo && this.timeTo != "" ? this.timeTo  : 
            '00:05')),
           activityDate: this.date,
         }
 
         var tempObject = {
           name: this.inputName,
-          start: this.date + ' ' + this.timeFrom.replace('AM','').replace('PM',''),
-          end: this.date + ' ' + this.timeTo.replace('AM','').replace('PM',''),
+          start: this.date + ' ' + this.timeFrom,
+          end: this.date + ' ' + this.timeTo,
         }
 
         axios
