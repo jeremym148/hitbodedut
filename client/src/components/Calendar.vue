@@ -191,7 +191,7 @@ import utils from './utils'
           // this.$store.dispatch("addEvents", slots)
           response.data.slots.map((event) => {
              console.log(event)
-            this.$store.dispatch("addEvent",mappToSite(event))
+            this.$store.dispatch("addEvent",this.mappToSite(event))
           })
           // for(event in response.data.slots){
           //   console.log(event)
