@@ -245,7 +245,7 @@ import store from '../store';
         if(this.inputName == '' || this.anonymousCheckbox){
           this.inputName = 'Anonymous'
         }
-
+        console.log(this.date + 'T' + this.timeFromSelected + ':00')
         var hObject = {
           username: this.inputName,
           startDatetime: new Date(this.date + 'T' + this.timeFromSelected + ':00'),

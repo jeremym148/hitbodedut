@@ -157,7 +157,7 @@ import utils from './utils'
         let newitem = {}
         newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD HH:mm');
         newitem.end = moment(slot.endDatetime).format('YYYY-MM-DD HH:mm');
-        newitem.activityDate = slot.activityDate ? moment(slot.activityDate).format('YYYY-MM-DD') : undefined;
+        // newitem.activityDate = slot.activityDate ? moment(slot.activityDate).format('YYYY-MM-DD') : undefined;
         newitem.name = slot.username;
         return newitem
       }
@@ -175,9 +175,11 @@ import utils from './utils'
           // // let events = response.data.slots;
           console.log(response)
           console.log(response.data.slots)
-          this.$store.dispatch("addEvents",response.data.slots.map( (item) => {
+          let slots = response.data.slots.map( (item) => {
               return this.mappToSite(item)
-          }))
+          })
+          console.log(slots);
+          this.$store.dispatch("addEvents", slots)
           // response.data.slots.map((event) => {
           //    console.log(event)
           //   this.$store.dispatch("addEvent",{
