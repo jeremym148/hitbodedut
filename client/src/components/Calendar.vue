@@ -71,6 +71,7 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 import store from '../store';
 import CreationModal from './CreationModal';
   export default {
@@ -128,6 +129,14 @@ import CreationModal from './CreationModal';
       // },
       hideCreateModal(){
         this.showCreateModal = false;
+      },
+      mappToSite(slot){
+        let newitem = {}
+        newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD HH:mm');
+        newitem.end = moment(slot.endDatetime).format('YYYY-MM-DD HH:mm');
+        newitem.activityDate = slot.activityDate ? moment(slot.activityDate).format('YYYY-MM-DD') : undefined;
+        newitem.name = slot.username;
+        return newitem
       }
     },
     mounted(){
@@ -143,16 +152,18 @@ import CreationModal from './CreationModal';
           // // let events = response.data.slots;
           console.log(response)
           console.log(response.data.slots)
-          this.$store.dispatch("addEvents",response.data.slots)
-          response.data.slots.map((event) => {
-             console.log(event)
-            this.$store.dispatch("addEvent",{
-              name: event.name,
-              start: event.start,
-              end: event.end,
-              // activityDate: event.activityDate
-            })
-          })
+          this.$store.dispatch("addEvents",response.data.slots.map( (item) => {
+              return mappToSite(item)
+          }))
+          // response.data.slots.map((event) => {
+          //    console.log(event)
+          //   this.$store.dispatch("addEvent",{
+          //     name: event.name,
+          //     start: event.start,
+          //     end: event.end,
+          //     // activityDate: event.activityDate
+          //   })
+          // })
           // for(event in response.data.slots){
           //   console.log(event)
           //   this.$store.dispatch("addEvent",{
