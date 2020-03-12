@@ -60,7 +60,6 @@
                                     :menu-props="{ bottom: true, offsetY: true }"
                                     v-model="timeFrom"
                                     append-icon="mdi-menu-down"
-                                    type="number"
                                     ></v-autocomplete>
                                 </v-flex>
                                 <v-spacer></v-spacer>
@@ -72,7 +71,6 @@
                                     v-model="timeTo"
                                     :menu-props="{ bottom: true, offsetY: true }"
                                     append-icon="mdi-menu-down"
-                                    type="number"
                                     ></v-autocomplete>
                                 </v-flex> 
                             </v-flex>
@@ -208,17 +206,22 @@ import store from '../store';
         }
       },
       optionsHours(){
-        var x = 10; //minutes interval
+        // var x = 10; //minutes interval
         var times = []; // time array
-        var tt = 0; // start time
-        var ap = ['AM', 'PM']; // AM-PM
+        // var tt = 0; // start time
+        // var ap = ['AM', 'PM']; // AM-PM
 
         //loop to increment the time and push results in array
-        for (var i=0;tt<24*60; i++) {
-          var hh = Math.floor(tt/60); // getting hours of day in 0-24 format
-          var mm = (tt%60); // getting minutes of the hour in 0-55 format
-          times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh/12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
-          tt = tt + x;
+        for (var i=0;i<24; i++) {
+          for( var j=0; j < 60; j +10){
+            var hour = i < 10 ? '0'+i : i;
+            var minutes= j<10 ? '0'+j:j;
+            times.push(i+':'+j)
+          }
+          // var hh = Math.floor(tt/60); // getting hours of day in 0-24 format
+          // var mm = (tt%60); // getting minutes of the hour in 0-55 format
+          // times[i] = ("0" + (hh % 12)).slice(-2) + ':' + ("0" + mm).slice(-2) + ap[Math.floor(hh/12)]; // pushing data in array in [00:00 - 12:00 AM/PM format]
+          // tt = tt + x;
         }
         return times
       },
