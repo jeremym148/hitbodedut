@@ -1,19 +1,19 @@
 <template>
   <v-row justify="center" v-if="date">
-    <v-dialog v-model="dialog" persistent max-width="290">
+    <v-dialog v-model="dialog" persistent max-width="580px">
 
       <!-- <template v-slot:activator="{ on }">
         <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
       </template> -->
 
-      <v-card class="modal-wrapper">
-        <h3 class="modal-title">Declare hitbodedut</h3>
+      <v-card class="modal__container">
+        <h3 class="modal__title">Declare hitbodedut</h3>
 
-            <v-container grid-list-md text-xs-center class="inputs-container">
+            <v-container grid-list-md text-xs-center>
                 <v-layout row wrap> <!-- row 1 -->
                     <v-flex xs3>
-                        <div class="inputsLabel">
-                            <span>Date</span>
+                        <div>
+                            <span class="modal__label">Date</span>
                         </div> 
                     </v-flex>
                     <v-flex xs9>
@@ -33,9 +33,10 @@
                                 readonly
                                 v-on="on"
                                 append-icon="mdi-menu-down"
+                                
                             ></v-text-field>
                             </template>
-                            <v-date-picker v-model="date" @input="dateMenu = false" color="black" prev-icon="mdi-chevron-left" next-icon="mdi-chevron-right"></v-date-picker>
+                            <v-date-picker v-model="date" @input="dateMenu = false" color="#f78b1f" prev-icon="mdi-chevron-left" next-icon="mdi-chevron-right"></v-date-picker>
                             
                         </v-menu>
 
@@ -43,36 +44,36 @@
                     </v-flex>
                 </v-layout>
 
-                <v-layout row wrap class="modal-row">  <!-- row 2 -->
+                <v-layout row wrap class="modal__row">  <!-- row 2 -->
                     <v-flex xs3>
-                        <div class="inputsLabel">
-                            <span>Hours</span>
+                        <div>
+                            <span class="modal__label">Hours</span>
                         </div> 
                     </v-flex>
-                    <v-flex xs9 style="display: flex; padding: 4px 0; align-items: baseline">
+                    <v-flex xs9 class="modal__row-content">
 
 
-                            <v-flex xs9 style="display: flex; padding: 4px 0;">
+                            <v-flex class="modal__row-content">
                                 <v-flex xs5>
-                                    <v-select
+                                    <v-autocomplete
                                     :items="optionsHours"
                                     :menu-props="{ bottom: true, offsetY: true }"
                                     v-model="timeFrom"
-                                    filled
                                     append-icon="mdi-menu-down"
-                                    ></v-select>
+                                    type="number"
+                                    ></v-autocomplete>
                                 </v-flex>
                                 <v-spacer></v-spacer>
-                                <span class="toLabel">to</span>
+                                <span class="modal__to-label">to</span>
                                 <v-spacer></v-spacer>
                                 <v-flex xs5>
-                                    <v-select
+                                    <v-autocomplete
                                     :items="optionsHours"
                                     v-model="timeTo"
                                     :menu-props="{ bottom: true, offsetY: true }"
-                                    filled
                                     append-icon="mdi-menu-down"
-                                    ></v-select>
+                                    type="number"
+                                    ></v-autocomplete>
                                 </v-flex> 
                             </v-flex>
 
@@ -132,15 +133,15 @@
                     </v-flex> 
                 </v-layout>
 
-                <v-layout row wrap class="modal-row"> <!-- row 1 -->
+                <v-layout row wrap class="modal__row"> <!-- row 1 -->
                     <v-flex xs3>
-                        <div class="inputsLabel">
-                            <span>Name</span>
+                        <div>
+                            <span class="modal__label">Name</span>
                         </div> 
                     </v-flex>
-                    <v-flex xs9 class="modal-user-name">
-                         <v-text-field style="padding-top: 0px; margin-top: 0px;" :disabled="anonymousCheckbox" v-model="inputName"></v-text-field>
-                         <v-checkbox v-model="anonymousCheckbox" label="Anonymous" color="#f78b1f" style="margin: 0"></v-checkbox>
+                    <v-flex xs9 class="modal__user-name">
+                         <v-text-field  :disabled="anonymousCheckbox" v-model="inputName"></v-text-field>
+                         <v-checkbox v-model="anonymousCheckbox" label="Anonymous" color="#f78b1f" class="modal__checkbox"></v-checkbox>
 
                     </v-flex>
                 </v-layout>
@@ -148,8 +149,8 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="#f78b1f" text @click="hideCreateModal">Cancel</v-btn>
-          <v-btn color="#f78b1f" text @click="saveHitbodedut">Save</v-btn>
+          <v-btn color="#f78b1f" class="modal__btn" text @click="hideCreateModal">Cancel</v-btn>
+          <v-btn color="#f78b1f" class="modal__btn" text @click="saveHitbodedut">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -272,13 +273,44 @@ import store from '../store';
   }
 </script>
 
-<style>
-.modal-wrapper{
-  padding: 12px;
+<style lang="scss">
+
+.modal{
+  max-width: 470px;
+
+  &__container{
+    padding: 25px;
+  }
+
+  &__title{
+    font-size: 30px;
+    margin-bottom: 22px;
+  }
+
+  &__row{
+    align-items: baseline;
+  }
+
+  &__row-content{
+    display: flex;
+    padding: 4px 0;
+    align-items: baseline;
+  }
+
+  &__label{
+    font-size: 24px;
+  }
+
+  &__checkbox label, &__btn span, &__to-label{
+    font-size: 22px;
+  }
+
 }
 
-.modal-row{
-  align-items: baseline;
+.theme--light.v-input {
+    padding-top: 0px;
+    margin-top: 0px;
+    font-size: 22px;
 }
 
 .v-text-field__details {
@@ -288,6 +320,34 @@ import store from '../store';
 /* .v-menu__content--fixed {
   left: 25% !important;
 } */
+
+ @media screen and (max-width: 1024px) {
+  .modal{
+
+    &__container{
+      padding: 10px;
+    }
+
+    &__title{
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    &__label{
+      font-size: 18px;
+    }
+
+    &__checkbox label, &__btn span, &__to-label{
+      font-size: 17px;
+    }
+
+  }
+
+  .theme--light.v-input{
+    font-size: 17px;
+  }
+
+}
 
 </style>
 

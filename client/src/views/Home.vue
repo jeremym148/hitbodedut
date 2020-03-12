@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <div class="citation">
-      <span class="citation-head">התבודדות הינה מעלה עליונה ביותר</span>
-      <span class="citation-sub">רבי נחמן ליקוטי מוהר"ן תנינא כ"ה</span>
+    <div class="home__citation">
+      <span class="home__citation-head">התבודדות הינה מעלה עליונה ביותר</span>
+      <span class="home__citation-source">רבי נחמן ליקוטי מוהר"ן תנינא כ"ה</span>
     </div>
-    <span class="total-appointment">
+    <span class="home__total">
       <span>There are currently:</span>
       <!-- <div class="heart"></div> -->
-      <div class="heart-hit">
+      <div class="home__heart-hit">
         <img src="../assets/heart.png" >
-        <div class="number-of-hit">{{hitNow}}</div>
+        <div class="home__number-of-hit">{{hitNow}}</div>
       </div>
     </span>
   </div>
@@ -40,49 +40,55 @@ export default {
 }
 </script>
 
-<style scoped>
-.citation{
-  display: flex;
-  flex-direction: column;
-}
+<style lang="scss">
 
-.citation-head{
-  font-size: 22px;
-  text-align: center;
-  padding-top: 10px;
-}
+.home{
 
-.citation-sub{
-  font-size: 12px;
-  font-style: italic; 
-  padding: 0 5px 8px;
-}
+  &__citation{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+  }
 
-.total-appointment{
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 10px;
-}
-
-.heart-hit{
-    position: absolute;
-    right: 70px;
-    top: 38px;
-}
-
-.heart-hit img{
-  animation: animate 1s linear infinite;
-  width: 75px;
-}
-
-.number-of-hit{
-  position: absolute;
-    top: 26px;
-    left: 42px;
-    font-weight: 600;
+  &__citation-head{
     font-size: 22px;
-    color: #ffffff;
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  &__citation-source{
+    font-size: 12px;
+    font-style: italic; 
+    padding: 0 5px 8px;
+    text-align: center;
+  }
+
+  &__total{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+  }
+
+  &__heart-hit{
+      position: absolute;
+      right: 70px;
+      top: 38px;
+  }
+
+  &__heart-hit img{
+    animation: animate 1s linear infinite;
+    width: 75px;
+  }
+
+  &__number-of-hit{
+    position: absolute;
+      top: 26px;
+      left: 42px;
+      font-weight: 600;
+      font-size: 22px;
+      color: #ffffff;
+  }
 }
 
 @keyframes animate{
@@ -109,61 +115,35 @@ export default {
   }
 }
 
-/* .heart{
-  width: 33px;
-  position: relative;
-  top: -25px;
-  height: 33px;
-  margin-right: 71px;
-  background:#ff0036;
-  transform: rotate(45deg) translate(10px,10px);
-  animation: ani 1s linear infinite;
+ @media screen and (max-width: 1024px) {
+  
+  .home{
+
+    &__heart-hit{
+        position: absolute;
+        right: 50px;
+        top: 50px;
+    }
+
+    &__heart-hit img{
+      animation: animate 1s linear infinite;
+      width: 60px;
+    }
+
+    &__number-of-hit{
+      position: absolute;
+        top: 20px;
+        left: 35px;
+        font-weight: 600;
+        font-size: 22px;
+        color: #ffffff;
+    }
+
+    &__citation-source{
+      text-align: left;
+    }
+  
+  }
+
 }
-
-.heart:before{
-  content: '';
-  width: 100%;
-  height: 100%;
-  background: #ff0036;
-  position: absolute;
-  top:-50%;
-  left:0;
-  border-radius: 50%;
-}
-
-.heart:after{
-  content:'';
-  width: 100%;
-  height: 100%;
-  background: #ff0036;
-  position: absolute;
-  bottom:0;
-  right:50%;
-  border-radius: 50%;
-} */
-
-
-/* @keyframes ani{
-  0%{
-    transform: rotate(45deg) translate(10px,10px) scale(1);
-  }
-  25%{
-    transform: rotate(45deg) translate(10px,10px) scale(1);
-  }
-  30%{
-    transform: rotate(45deg) translate(10px,10px) scale(1.4);
-  }
-  50%{
-    transform: rotate(45deg) translate(10px,10px) scale(1.2);
-  }
-  70%{
-    transform: rotate(45deg) translate(10px,10px) scale(1.4);
-  }
-  90%{
-    transform: rotate(45deg) translate(10px,10px) scale(1);
-  }
-  100%{
-    transform: rotate(45deg) translate(10px,10px) scale(1);
-  }
-} */
 </style>
