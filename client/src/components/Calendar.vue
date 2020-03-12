@@ -175,19 +175,14 @@ import utils from './utils'
           // // let events = response.data.slots;
           console.log(response)
           console.log(response.data.slots)
-          let slots = response.data.slots.map( (item) => {
-              return this.mappToSite(item)
-          })
-          console.log(slots);
-          this.$store.dispatch("addEvents", slots)
+          // let slots = response.data.slots.map( (item) => {
+          //     return this.mappToSite(item)
+          // })
+          // console.log(slots);
+          // this.$store.dispatch("addEvents", slots)
           // response.data.slots.map((event) => {
-          //    console.log(event)
-          //   this.$store.dispatch("addEvent",{
-          //     name: event.name,
-          //     start: event.start,
-          //     end: event.end,
-          //     // activityDate: event.activityDate
-          //   })
+             console.log(event)
+            this.$store.dispatch("addEvent",mappToSite(slots))
           // })
           // for(event in response.data.slots){
           //   console.log(event)
