@@ -131,6 +131,9 @@ import CreationModal from './CreationModal';
       }
     },
     mounted(){
+
+      getHebrewCal();
+      
       axios
         .get("/api/slots")
         .then(response => {
