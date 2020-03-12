@@ -248,8 +248,8 @@ import store from '../store';
 
         var hObject = {
           username: this.inputName,
-          startDatetime: this.date + ' ' + this.timeFromSelected,
-          endDatetime: this.date + ' ' + this.timeToSelected,
+          startDatetime: new Date(this.date + 'T' + this.timeFromSelected + ':00'),
+          endDatetime: new Date(this.date + 'T' + this.timeToSelected + ':00'),
           activityDate: this.date,
         }
 

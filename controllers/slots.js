@@ -43,10 +43,10 @@ const getAllSlots = async (req, res) => {
         order: [['startDatetime', 'ASC']],
         // limit: count,
       });
-      let slotsMapped = slots.map( (item) => {
-        return mappToSite(item)
-    })
-    return res.status(200).json({ slots: slotsMapped });
+    //   let slotsMapped = slots.map( (item) => {
+    //     return mappToSite(item)
+    // })
+    return res.status(200).json({ slots });
   } catch (error) {
     return res.status(500).send(error.message);
   }
