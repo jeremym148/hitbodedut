@@ -74,6 +74,7 @@ export default {
       position: absolute;
       right: 70px;
       top: 38px;
+      z-index: 5;
   }
 
   &__heart-hit img{
