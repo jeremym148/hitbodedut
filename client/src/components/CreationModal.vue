@@ -222,7 +222,7 @@ import store from '../store';
         var arr = [], i, j;
         for(i=0; i<24; i++) {
           for(j=0; j<6; j++) {
-            arr.push(i + ":" + (j===0 ? "00" : 10*j) );
+            arr.push((i < 10 ? "0"+i : i) + ":" + (j===0 ? "00" : 10*j) );
           }
         }
         return arr;
@@ -254,7 +254,7 @@ import store from '../store';
         var hObject = {
           username: this.inputName,
           startDatetime: new Date(this.date + 'T' + this.timeFrom),
-          endDatetime: new Date(this.date + 'T' + timeTo),
+          endDatetime: new Date(this.date + 'T' + this.timeTo),
           activityDate: this.date,
         }
 
