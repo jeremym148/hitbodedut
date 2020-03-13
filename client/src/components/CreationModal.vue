@@ -221,8 +221,8 @@ import store from '../store';
         // return times
         var arr = [], i, j;
         for(i=0; i<24; i++) {
-          for(j=0; j<4; j++) {
-            arr.push(i + ":" + (j===0 ? "00" : 15*j) );
+          for(j=0; j<6; j++) {
+            arr.push(i + ":" + (j===0 ? "00" : 10*j) );
           }
         }
         return arr;
@@ -251,15 +251,10 @@ import store from '../store';
         if(this.inputName == '' || this.anonymousCheckbox){
           this.inputName = 'Anonymous'
         }
-        console.log(this.date + 'T' + this.timeFrom )
         var hObject = {
           username: this.inputName,
-          startDatetime: new Date(this.date + 'T' + 
-          (this.timeFrom && this.timeFrom != "" ? this.timeFrom  : 
-           '00:04')),
-          endDatetime: new Date(this.date + 'T' + 
-          (this.timeTo && this.timeTo != "" ? this.timeTo  : 
-           '00:05')),
+          startDatetime: new Date(this.date + 'T' + this.timeFrom),
+          endDatetime: new Date(this.date + 'T' + timeTo),
           activityDate: this.date,
         }
 
@@ -273,6 +268,7 @@ import store from '../store';
           .post("/api/slots", hObject)
           .then(response => {
             console.log(response);
+            console.log(tempObject)
             this.$store.dispatch("addEvent", tempObject);
           });
 
