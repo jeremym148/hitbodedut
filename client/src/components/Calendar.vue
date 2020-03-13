@@ -70,7 +70,7 @@
             right
             color="#f78b1f"
             fab
-            style="bottom: 40px"
+            style="bottom: 10%; right:20px"
             @click="openCreateModal"
           >
         <v-icon>mdi-plus</v-icon>
