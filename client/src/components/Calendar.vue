@@ -42,7 +42,7 @@
 
               <template v-slot:day-header="{date}">
                 <template class="text-center">
-                  <div class="hebrewDate">{{hebrewCal.find(item => item.date == date).hebrew}}</div>
+                  <div class="hebrewDate">{{hebrewCal ? hebrewCal.find(item => item.date == date).hebrew : ""}}</div>
                 </template>
               </template>
 
@@ -165,8 +165,8 @@ import utils from './utils'
       // },
       mappToSite(slot){
         let newitem = {}
-        newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD HH:mm');
-        newitem.end = moment(slot.endDatetime).format('YYYY-MM-DD HH:mm');
+        newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD hh:mm');
+        newitem.end = moment(slot.endDatetime).format('YYYY-MM-DD hh:mm');
         // newitem.activityDate = slot.activityDate ? moment(slot.activityDate).format('YYYY-MM-DD') : undefined;
         newitem.name = slot.username;
         return newitem
