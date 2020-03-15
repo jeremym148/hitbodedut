@@ -166,12 +166,11 @@ import store from '../store';
         start: "",
         menu2: false,
         menu3: false,
-        timeFromSelected: "", 
-        timeToSelected: "", 
+        timeFromSelected: null, 
+        timeToSelected: null, 
         anonymousCheckbox: false,
         inputName: '',
-        timeFrom: null,
-        timeTo: null,
+
       }
     },
     props:['dialog', 'selectedSlot'],
@@ -180,24 +179,34 @@ import store from '../store';
         var d = new Date();
         return d.getFullYear() + '-' + ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + d.getDate()).slice(-2);
       },
-      // timeFrom:{
-      //   get: function () {
-      //     if(this.selectedSlot)
-      //    { return ("0" + this.selectedSlot.hour).slice(-2) + ':00';}
-      //   },
-      //   set: function (newValue) {
-      //     this.timeFromSelected = newValue;    
-      //   }
-      // },
-      // timeTo:{
-      //   get: function () {
-      //      if(this.selectedSlot)
-      //    { return ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';}
-      //   },
-      //   set: function (newValue) {
-      //     this.timeToSelected = newValue;    
-      //   }
-      // },
+      timeFrom:{
+        get: function () {
+          if (this.timeFromSelected){
+            return this.timeFromSelected;
+          }
+          if(this.selectedSlot){ 
+            this.timeFromSelected = ("0" + (this.selectedSlot.hour)).slice(-2) + ':00';
+            return ("0" + this.selectedSlot.hour).slice(-2) + ':00';
+            }
+        },
+        set: function (newValue) {
+          this.timeFromSelected = newValue;    
+        }
+      },
+      timeTo:{
+        get: function () {
+          if (this.timeToSelected){
+            return this.timeToSelected;
+          }
+           if(this.selectedSlot)
+         { 
+           this.timeToSelected = ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';
+           return ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';}
+        },
+        set: function (newValue) {
+          this.timeToSelected = newValue;    
+        }
+      },
       date(){
         if(this.selectedSlot){
           return this.selectedSlot.date
@@ -230,11 +239,6 @@ import store from '../store';
     },
     mounted(){
       this.start = this.date;
-
-      if(this.selectedSlot){
-        this.timeFromSelected = ("0" + (this.selectedSlot.hour)).slice(-2) + ':00';
-        this.timeToSelected = ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';
-      }
     },
      updated(){
       console.log(this.dialog)
@@ -261,14 +265,14 @@ import store from '../store';
         }
         var hObject = {
           username: this.inputName,
-          startDatetime: new Date(this.date + 'T' + this.timeFrom + ':00'+ tzString),
-          endDatetime: new Date(this.date + 'T' + this.timeTo + ':00' + tzString),
+          startDatetime: new Date(this.date + 'T' + this.timeFromSelected + ':00'+ tzString),
+          endDatetime: new Date(this.date + 'T' + this.timeToSelected + ':00' + tzString),
           activityDate: this.date,
         }
         var tempObject = {
           name: this.inputName,
-          start: this.date + ' ' + this.timeFrom,
-          end: this.date + ' ' + this.timeTo,
+          start: this.date + ' ' + this.timeFromSelected,
+          end: this.date + ' ' + this.timeToSelected,
         }
         axios
           .post("/api/slots", hObject)
