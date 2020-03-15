@@ -23,7 +23,6 @@ export default {
   name: 'Home',
   data () {
     return {
-      hitNow: "0"
     }
   },
   components: {
@@ -34,8 +33,13 @@ export default {
         .get("/api/slots/current")
         .then(response => {
           console.log(response.data.count)
-          this.hitNow = response.data.count;
+          this.$store.dispatch("setHitNow", response.data.count)
         })
+  },
+  computed:{
+    hitNow(){
+      return this.$store.state.hitNow;
+    }
   }
 }
 </script>

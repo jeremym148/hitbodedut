@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     events: [],
-    hebrewCal: []
+    hebrewCal: [],
+    hitNow:0
   },
   mutations: {
     addEvent(state, info) {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     addHebCal(state, info) {
       state.hebrewCal = info
+    },
+    setHitNow(state, info) {
+      state.hitNow = info
     },
   },
   actions: {
@@ -29,6 +33,9 @@ export default new Vuex.Store({
     addHebCal(context, info) {
       context.commit('addHebCal', info)
     },
+    setHitNow(context, info) {
+      context.commit('setHitNow', info)
+    }
   },
   modules: {
   }

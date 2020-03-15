@@ -276,6 +276,12 @@ import store from '../store';
             console.log(response);
             console.log(tempObject)
             this.$store.dispatch("addEvent", tempObject);
+             axios
+              .get("/api/slots/current")
+              .then(response => {
+                console.log(response.data.count)
+                this.$store.dispatch("setHitNow", response.data.count)
+        })
           });
 
         this.hideCreateModal();
