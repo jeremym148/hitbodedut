@@ -114,9 +114,15 @@ import utils from './utils'
         return d.getMinutes();
       },
       events(){
-        let events = this.$store.state.events;
-        console.log(events)
-        return events;
+        // console.log(this.$store.state.events)
+        // // return  this.$store.state.events;
+        // let events = this.$store.state.events
+        // events.push({
+        //   name: '',
+        //   start: this.nowDate + ' ' + (this.nowHour + 1) + ':' + this.nowMinute
+        // })
+        // console.log(events)
+        return this.$store.state.events;
       },
       hebrewCal(){
         return this.$store.state.hebrewCal;
@@ -181,8 +187,6 @@ import utils from './utils'
 
           // let response = {data:{"slots":[{"start":"2020-03-10 09:10","end":"2020-03-10 09:20","activityDate":"2020-04-03","name":"test"},{"start":"2020-04-03 09:10","end":"2020-04-03 09:20","activityDate":"Invalid date","name":"test2"}]}};
           // // let events = response.data.slots;
-          console.log(response)
-          console.log(response.data.slots)
           let slots = response.data.slots.map( (item) => {
               return this.mappToSite(item)
           })
