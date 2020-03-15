@@ -44,7 +44,8 @@
                   <div v-if="hour == nowHour" class="calendar__now-indicator"
                     :style="{
                       top: minutesToPixels(nowMinute) + 'px',           
-                      position: 'relative'
+                      position: 'relative',
+                      zIndex: 1000
                     }">
                   </div>
                   <div v-if="hour == nowHour" class="calendar__now-indicator-left"
@@ -54,6 +55,7 @@
                       width: '10px',
                       height: '10px',  
                       position: 'relative',
+                      zIndex: 1000
                     }">
                   </div>
                 </template>
