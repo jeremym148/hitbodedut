@@ -40,6 +40,12 @@
                 </template>
               </template> -->
 
+              <template v-slot:day-header="{date}">
+                <template class="text-center">
+                  <div class="hebrewDate">{{hebrewCal.find(item => item.date == date).hebrew}}</div>
+                </template>
+              </template>
+
 
 
 
@@ -123,6 +129,9 @@ import utils from './utils'
         console.log(events)
         return events;
       },
+      hebrewCal(){
+        return this.$store.state.hebrewCal;
+      },
     },
     methods:{
       log(e){
@@ -174,7 +183,7 @@ import utils from './utils'
     },
     mounted(){
 
-      // this.hebrewCal = utils.getHebrewCal();
+      utils.getHebrewCal();
 
       axios
         .get("/api/slots")
@@ -243,6 +252,9 @@ import utils from './utils'
   width: 50px !important;
 }
 
+.hebrewDate{
+  text-align:center;
+}
 
  @media screen and (max-width: 1024px) {
   .calendar{
