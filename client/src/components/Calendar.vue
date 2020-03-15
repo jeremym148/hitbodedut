@@ -1,11 +1,11 @@
 <template>
   <v-row>
     <v-col>
-      <v-sheet height="72vh" class="calendar">
+      <v-sheet height="72vh">
 
         <v-layout wrap>
 
-          <div class="calendar__row-btn">
+          <div class="row-btn">
             <v-btn @click="$refs.calendar.prev()">
                 <v-icon>mdi-chevron-left</v-icon>
             </v-btn>
@@ -18,7 +18,7 @@
           <v-flex
             xs12
           >
-            <v-sheet class="calendar__height">
+            <v-sheet class="calendar-height">
               <v-calendar
                 ref="calendar"
                 v-model="start"
@@ -30,24 +30,27 @@
                 @click:time="openCreateModal"
               >
 
-
-              <!-- <template v-slot:day-header="{date}">
-                <template class="text-center">
-                  <div class="hebrewDate">{{hebrewCal ? hebrewCal.find(item => item.date == date).hebrew : ""}}</div>
+              <!-- Hebrew date -->
+              <template v-slot:day-header="{ date }">
+                <template
+                  
+                  class="text-center"
+                >
+                  {{hebrewDate(date)}}
                 </template>
-              </template> -->
+              </template>
 
 
 
 
-                <!-- <template  v-slot:interval="{ minutesToPixels, hour }">
-                  <div v-if="hour == nowHour" class="calendar__now-indicator"
+                <template  v-slot:interval="{ minutesToPixels, hour }">
+                  <div v-if="hour == nowHour" class="nowIndicator"
                     :style="{
                       top: minutesToPixels(nowMinute) + 'px',           
                       position: 'relative'
                     }">
                   </div>
-                  <div v-if="hour == nowHour" class="calendar__now-indicator-left"
+                  <div v-if="hour == nowHour" class="nowIndicatorLeft"
                     :style="{
                       top: 'calc(' + minutesToPixels(nowMinute) + 'px - 6px)', 
                       borderRadius: '50px',
@@ -56,7 +59,7 @@
                       position: 'relative',
                     }">
                   </div>
-                </template> -->
+                </template>
               </v-calendar>
             </v-sheet>
           </v-flex>
@@ -67,7 +70,7 @@
             right
             color="#f78b1f"
             fab
-            style="bottom: 10%; right:20px"
+            style="bottom: 40px"
             @click="openCreateModal"
           >
         <v-icon>mdi-plus</v-icon>
@@ -117,11 +120,7 @@ import utils from './utils'
         //   name: '',
         //   start: this.nowDate + ' ' + this.nowHourMinute
         // })
-        console.log(events)
         return events;
-      },
-      hebrewCal(){
-        return this.$store.state.hebrewCal;
       },
     },
     methods:{
@@ -147,13 +146,13 @@ import utils from './utils'
       hideCreateModal(){
         this.showCreateModal = false;
       },
-      // getHebrewDate(date){
-      //   let hebrewDate = "";
-      //   if(this.hebrewCal && this.hebrewCal.length > 0){
-      //     hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
-      //   }
-      //   return hebrewDate
-      // },
+      getHebrewDate(date){
+        let hebrewDate = "";
+        if(this.hebrewCal && this.hebrewCal.length > 0){
+          hebrewDate = this.hebrewCal.find(item => item.date == date).hebrew
+        }
+        return hebrewDate
+      },
       mappToSite(slot){
         let newitem = {}
         newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD HH:mm');
@@ -162,19 +161,19 @@ import utils from './utils'
         newitem.name = slot.username;
         return newitem
       },
-      // hebrewDate(date){
-      //   let hebCal = this.$store.state.hebrewCal;
-      //   if(hebCal && (hebCal.length > 0)){
-      //     return this.$store.state.hebrewCal.find(item => item.date == date).hebrew
-      //   } else {
-      //     return null
-      //   }
+      hebrewDate(date){
+        let hebCal = this.$store.state.hebrewCal;
+        if(hebCal && (hebCal.length > 0)){
+          return this.$store.state.hebrewCal.find(item => item.date == date).hebrew
+        } else {
+          return null
+        }
         
-      // }
+      }
     },
     mounted(){
 
-      utils.getHebrewCal();
+      this.hebrewCal = utils.getHebrewCal();
 
       axios
         .get("/api/slots")
@@ -191,8 +190,13 @@ import utils from './utils'
           console.log(slots);
           this.$store.dispatch("addEvents", slots)
           // response.data.slots.map((event) => {
-          //    console.log(this.mappToSite(event))
-          //   this.$store.dispatch("addEvent",this.mappToSite(event))
+          //    console.log(event)
+          //   this.$store.dispatch("addEvent",{
+          //     name: event.name,
+          //     start: event.start,
+          //     end: event.end,
+          //     // activityDate: event.activityDate
+          //   })
           // })
           // for(event in response.data.slots){
           //   console.log(event)
@@ -209,29 +213,19 @@ import utils from './utils'
   }
 </script>
 
-<style lang="scss">
+<style>
+.calendar-height{
+  height: 77vh;
+}
 
-.calendar{
-
-  &__height{
-    height: 77vh;
-  }
-
-  &__row-btn{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 40px;
-    position: absolute;
-    margin-top: 22px;
-    z-index: 2;
-  }
-
-  &__now-indicator, &__now-indicator-left{
-    background-color: red;
-    height: 2px;
-  }
-
+.row-btn{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 40px;
+  position: absolute;
+  margin-top: 22px;
+  z-index: 2;
 }
 
 .v-calendar-daily__intervals-head{
@@ -243,83 +237,22 @@ import utils from './utils'
   width: 50px !important;
 }
 
-.hebrewDate{
-  text-align:center;
+.nowIndicator{
+  background-color: red;
+  height: 2px;
+}
+.nowIndicatorLeft{
+  background-color: red;
+  height: 2px;
 }
 
  @media screen and (max-width: 1024px) {
-  .calendar{
+  .calendar-height{
+    height: 68vh;
+  }
 
-    &__row-btn{
-      padding: 0px 10px;
-    }
+  .row-btn{
+    padding: 0px 10px;
   }
 }
-
-/* ----------- iPhone 4 and 4S ----------- */
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: portrait) {
-    .calendar{
-      &__height{
-        height: 61vh;
-      }
-    }
-}
-
-/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 568px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: portrait) {
-    .calendar{
-
-      &__height{
-        height: 68vh;
-      }
-    }
-}
-
-/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: portrait) { 
-    .calendar{
-      &__height{
-        height: 71vh;
-      }
-    }
-}
-
-/* ----------- iPhone 6+, 7+ and 8+ ----------- */
-@media only screen 
-  and (min-device-width: 414px) 
-  and (max-device-width: 736px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: portrait) { 
-    .calendar{
-      &__height{
-        height: 74vh;
-      }
-    }
-}
-
-/* ----------- iPhone X ----------- *//* Portrait */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: portrait) { 
-    .calendar{
-          &__height{
-            height: 76vh;
-          }
-      }
-}
-
 </style>
