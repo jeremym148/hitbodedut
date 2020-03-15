@@ -5,7 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    events: [],
+    events: [{
+        name: '',
+        start: '2020-03-16'+ ' ' + '16' + ':' + '00'
+      }],
     hebrewCal: [],
     hitNow:0
   },
@@ -15,6 +18,9 @@ export default new Vuex.Store({
     },
     addEvents(state, info) {
       state.events = state.events.concat(info)
+    },
+    setEvents(state, info) {
+      state.events = info
     },
     addHebCal(state, info) {
       state.hebrewCal = info
@@ -29,6 +35,9 @@ export default new Vuex.Store({
     },
     addEvents(context, info) {
       context.commit('addEvents', info)
+    },
+    setEvents(context, info) {
+      context.commit('setEvents', info)
     },
     addHebCal(context, info) {
       context.commit('addHebCal', info)
