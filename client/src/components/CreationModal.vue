@@ -251,19 +251,25 @@ import store from '../store';
         if(this.inputName == '' || this.anonymousCheckbox){
           this.inputName = 'Anonymous'
         }
+        var d = new Date()
+        var tz = d.getTimezoneOffset()/60;
+        var tzString;
+        if(Math.abs(tz)<10){
+          tzString = tz <= 0 ? `+0${Math.abs(tz)}:00` : `-0${Math.abs(tz)}:00`;
+        } else {
+          tzString = tz <= 0 ? `${Math.abs(tz)}:00` : `-${Math.abs(tz)}:00`;
+        }
         var hObject = {
           username: this.inputName,
-          startDatetime: new Date(this.date + 'T' + this.timeFrom),
-          endDatetime: new Date(this.date + 'T' + this.timeTo),
+          startDatetime: new Date(this.date + 'T' + this.timeFrom + ':00'+ tzString),
+          endDatetime: new Date(this.date + 'T' + this.timeTo + ':00' + tzString),
           activityDate: this.date,
         }
-
         var tempObject = {
           name: this.inputName,
           start: this.date + ' ' + this.timeFrom,
           end: this.date + ' ' + this.timeTo,
         }
-
         axios
           .post("/api/slots", hObject)
           .then(response => {

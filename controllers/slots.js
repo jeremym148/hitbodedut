@@ -5,10 +5,10 @@ const { QueryTypes } = require('sequelize');
 const createSlot = async (req, res) => {
   try {
     console.log(req.body)
-    const slot = await models.Slot.create(req.body);
-    if(!slot.startDatetime || slot.startDatetime == 'Invalid Date'  || slot.startDatetime == ''){
+    if(!req.body.startDatetime || req.body.startDatetime == 'Invalid Date'  || req.body.startDatetime == ''){
       throw 'TIME NOT GOOD'
     }
+    const slot = await models.Slot.create(req.body);
     return res.status(201).json(slot);
   } catch (error) {
     return res.status(500).json({ error: error.message });
