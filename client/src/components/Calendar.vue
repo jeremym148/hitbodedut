@@ -115,10 +115,6 @@ import utils from './utils'
       },
       events(){
         let events = this.$store.state.events;
-        events.push({
-          name: '',
-          start: this.nowDate + ' ' + (this.nowHour + 1) + ':' + this.nowMinute
-        })
         console.log(events)
         return events;
       },
