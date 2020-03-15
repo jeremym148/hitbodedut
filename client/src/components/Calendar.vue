@@ -30,21 +30,12 @@
                 @click:time="openCreateModal"
               >
 
-              <!-- Hebrew date
-              <template v-slot:day-header="{ date }">
-                <template
-                  
-                  class="text-center"
-                >
-                  {{hebrewDate(date)}}
-                </template>
-              </template> -->
 
-              <template v-slot:day-header="{date}">
+              <!-- <template v-slot:day-header="{date}">
                 <template class="text-center">
                   <div class="hebrewDate">{{hebrewCal ? hebrewCal.find(item => item.date == date).hebrew : ""}}</div>
                 </template>
-              </template>
+              </template> -->
 
 
 
@@ -165,8 +156,8 @@ import utils from './utils'
       // },
       mappToSite(slot){
         let newitem = {}
-        newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD hh:mm');
-        newitem.end = moment(slot.endDatetime).format('YYYY-MM-DD hh:mm');
+        newitem.start = moment(slot.startDatetime).format('YYYY-MM-DD HH:mm');
+        newitem.end = moment(slot.endDatetime).format('YYYY-MM-DD HH:mm');
         // newitem.activityDate = slot.activityDate ? moment(slot.activityDate).format('YYYY-MM-DD') : undefined;
         newitem.name = slot.username;
         return newitem
