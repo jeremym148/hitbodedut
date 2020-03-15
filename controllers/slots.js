@@ -4,6 +4,7 @@ const { QueryTypes } = require('sequelize');
 
 const createSlot = async (req, res) => {
   try {
+    console.log(req.body)
     const slot = await models.Slot.create(req.body);
     if(!slot.startDatetime || slot.startDatetime == 'Invalid Date'  || slot.startDatetime == ''){
       throw 'TIME NOT GOOD'
