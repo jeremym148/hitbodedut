@@ -33,7 +33,7 @@
 
               <template v-slot:day-header="{date}">
                 <template class="text-center">
-                  <div class="hebrewDate">{{hebrewCal ? hebrewCal.find(item => item.date == date).hebrew : ""}}</div>
+                  <div class="hebrewDate">{{hebrewCal && hebrewCal.length > 0 ? hebrewCal.find(item => item.date == date).hebrew : ""}}</div>
                 </template>
               </template>
 
