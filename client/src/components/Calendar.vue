@@ -178,6 +178,8 @@ import utils from './utils'
     },
     mounted(){
 
+      this.$refs.calendar.scrollToTime(("0" + this.nowHour).slice(-2) + ':00');
+
       utils.getHebrewCal();
 
       axios
