@@ -27,6 +27,7 @@
                 color="#f78b1f"
                 event-color="#f78b1f"
                 :events="events"
+                @change="getEvents"
                 @click:time="openCreateModal"
               >
 
@@ -175,6 +176,33 @@ import utils from './utils'
       //   }
         
       // }
+
+      getEvents(e){
+        console.log(e)
+        if(e && e.start && e.start.date){
+          axios
+          .get(`/api/slots?activityDate=${e.start.date}`)
+          .then(response => {
+            console.log(response)
+            let slots = response.data.slots.map( (item) => {
+                return this.mappToSite(item)
+            })
+            console.log(slots);
+            this.$store.dispatch("setEvents", slots)
+          });
+        } else {
+          axios
+          .get(`/api/slots?activityDate=${moment(new Date()).format('YYYY-MM-DD') }`)
+          .then(response => {
+            console.log(response)
+            let slots = response.data.slots.map( (item) => {
+                return this.mappToSite(item)
+            })
+            console.log(slots);
+            this.$store.dispatch("setEvents", slots)
+          });
+        }
+      }
     },
     mounted(){
 
@@ -182,33 +210,35 @@ import utils from './utils'
 
       utils.getHebrewCal();
 
-      axios
-        .get("/api/slots")
-        .then(response => {
-          console.log(response)
+      this.getEvents();
 
-          // let response = {data:{"slots":[{"start":"2020-03-10 09:10","end":"2020-03-10 09:20","activityDate":"2020-04-03","name":"test"},{"start":"2020-04-03 09:10","end":"2020-04-03 09:20","activityDate":"Invalid date","name":"test2"}]}};
-          // // let events = response.data.slots;
-          let slots = response.data.slots.map( (item) => {
-              return this.mappToSite(item)
-          })
-          console.log(slots);
-          this.$store.dispatch("setEvents", slots)
-          // response.data.slots.map((event) => {
-          //    console.log(this.mappToSite(event))
-          //   this.$store.dispatch("addEvent",this.mappToSite(event))
-          // })
-          // for(event in response.data.slots){
-          //   console.log(event)
-          //   this.$store.dispatch("addEvent",{
-          //     name: event.name,
-          //     start: event.start,
-          //     end: event.end,
-          //     // activityDate: event.activityDate
-          //   })
-          // }
-          // this.$store.dispatch("addEvent", response.data.slots);
-        });
+      // axios
+      //   .get("/api/slots")
+      //   .then(response => {
+      //     console.log(response)
+
+      //     // let response = {data:{"slots":[{"start":"2020-03-10 09:10","end":"2020-03-10 09:20","activityDate":"2020-04-03","name":"test"},{"start":"2020-04-03 09:10","end":"2020-04-03 09:20","activityDate":"Invalid date","name":"test2"}]}};
+      //     // // let events = response.data.slots;
+      //     let slots = response.data.slots.map( (item) => {
+      //         return this.mappToSite(item)
+      //     })
+      //     console.log(slots);
+      //     this.$store.dispatch("setEvents", slots)
+      //     // response.data.slots.map((event) => {
+      //     //    console.log(this.mappToSite(event))
+      //     //   this.$store.dispatch("addEvent",this.mappToSite(event))
+      //     // })
+      //     // for(event in response.data.slots){
+      //     //   console.log(event)
+      //     //   this.$store.dispatch("addEvent",{
+      //     //     name: event.name,
+      //     //     start: event.start,
+      //     //     end: event.end,
+      //     //     // activityDate: event.activityDate
+      //     //   })
+      //     // }
+      //     // this.$store.dispatch("addEvent", response.data.slots);
+      //   });
     },
   }
 </script>

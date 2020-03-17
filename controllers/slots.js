@@ -1,6 +1,6 @@
 const models = require("../database/models");
 const moment = require('moment');
-const { QueryTypes } = require('sequelize');
+const { QueryTypes, Op } = require('sequelize');
 
 const createSlot = async (req, res) => {
   try {
@@ -26,21 +26,28 @@ const getCurrentHitbodeduters = async (req, res) => {
 
 const getAllSlots = async (req, res) => {
   try {
-    var whereCondition = {};
-      if (req.query.activityDate){
-          whereCondition.startDatetime = {
-            [sequelize.Op.between]: [req.query.activityDate, req.query.activityDate],
-         }        
-      }
+    // var whereCondition = {};
+    //   if (req.query.activityDate){
+    //       let d = new Date(req.query.activityDate);
+    //       let yesterday = new Date().setDate(d.getDate() -1)
+    //       let tomorrow = new Date().setDate(d.getDate() +1)
+    //       whereCondition.startDatetime = {
+    //         [Op.between]: [yesterday, tomorrow],
+    //      }        
+    //   }
       // if(req.query.isNow == "true"){
       //   whereCondition[sequelize.fn"NOW()"] = {
       //     [sequelize.Op.between]: ["startDatetime", "endDatetime"],
       //  } 
       // }
-      
+      let d = new Date(req.query.activityDate);
+          let yesterday = new Date().setDate(d.getDate() -1)
+          let tomorrow = new Date().setDate(d.getDate() +1)
     const slots = await models.Slot.findAll({
         // group: [sequelize.fn('date_trunc', 'day', sequelize.col('startDatetime'))],
-        where: whereCondition,
+        where: {startDatetime : {
+          [Op.between]: [yesterday, tomorrow],
+       } },
         logging: console.log,
         raw: true,
         order: [['startDatetime', 'ASC']],
