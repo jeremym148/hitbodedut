@@ -181,10 +181,11 @@ import store from '../store';
       },
       timeFrom:{
         get: function () {
+          console.log(this.timeFromSelected)
           if (this.timeFromSelected){
             return this.timeFromSelected;
           }
-          if(this.selectedSlot){ 
+          if(this.selectedSlot && this.dialog){ 
             this.timeFromSelected = ("0" + (this.selectedSlot.hour)).slice(-2) + ':00';
             return ("0" + this.selectedSlot.hour).slice(-2) + ':00';
             }
@@ -195,10 +196,12 @@ import store from '../store';
       },
       timeTo:{
         get: function () {
+          console.log(this.timeToSelected)
+          console.log(this.selectedSlot)
           if (this.timeToSelected){
             return this.timeToSelected;
           }
-           if(this.selectedSlot)
+           if(this.selectedSlot && this.dialog)
          { 
            this.timeToSelected = ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';
            return ("0" + (this.selectedSlot.hour + 1)).slice(-2) + ':00';}
@@ -239,13 +242,21 @@ import store from '../store';
     },
     mounted(){
       this.start = this.date;
+      console.log("ddddddd")
+
     },
      updated(){
       console.log(this.dialog)
+      console.log(this.timeFromSelected)
     },
     methods:{
       hideCreateModal(){
+        console.log('hideeee')
+        this.timeFromSelected = null
+        this.timeToSelected = null
+        
         this.$emit('hideCreateModal')
+
       },
       inputChange(e){
         console.log(e)
@@ -287,7 +298,6 @@ import store from '../store';
                 this.$store.dispatch("setHitNow", response.data.count)
         })
           });
-
         this.hideCreateModal();
       }
     }
